@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Christmas Fun Hub - Free Holiday Experience</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Free Christmas hub with Santa AI powered by Gemini. Get gift recommendations, enjoy festive music, jokes, and holiday fun!">
+    <meta name="keywords" content="Christmas, free holiday fun, Santa AI, Gemini AI, gift recommendations, Christmas music">
+    <meta name="author" content="Christmas Fun Hub">
+    
+    <!-- Open Graph Tags for Social Media -->
+    <meta property="og:title" content="🎄 Christmas Fun Hub - Free Holiday Experience">
+    <meta property="og:description" content="Free Christmas hub with Santa AI, music, games and holiday fun!">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://christmas-fun-hub.vercel.app">
+    <meta property="og:image" content="https://christmas-fun-hub.vercel.app/christmas-thumbnail.png">
+    
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Mountains+of+Christmas:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎄</text></svg>">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="animated-bg">
+        <div class="shooting-star"></div>
+        <div class="snow-hill"></div>
+        <canvas id="snow"></canvas>
+    </div>
+
+    <!-- Christmas Countdown Timer -->
+    <div class="countdown-banner">
+        <div class="container">
+            <div class="countdown-content">
+                <span class="countdown-label"><i class="fas fa-gift me-2"></i>Christmas Countdown:</span>
+                <div class="countdown-timer">
+                    <div class="countdown-item">
+                        <span id="days">00</span>
+                        <small>Days</small>
+                    </div>
+                    <div class="countdown-item">
+                        <span id="hours">00</span>
+                        <small>Hours</small>
+                    </div>
+                    <div class="countdown-item">
+                        <span id="minutes">00</span>
+                        <small>Minutes</small>
+                    </div>
+                    <div class="countdown-item">
+                        <span id="seconds">00</span>
+                        <small>Seconds</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Navigation -->
+        <nav class="navbar">
+            <div class="navbar-brand">
+                <span class="brand-text">🎄 Christmas Fun Hub</span>
+                <span class="free-badge">FREE</span>
+            </div>
+            <div class="navbar-menu">
+                <a href="#" class="nav-item active" data-page="landing">
+                    <i class="fas fa-home"></i> Home
+                </a>
+                <a href="#" class="nav-item" data-page="checklist">
+                    <i class="fas fa-list-check"></i> Checklist
+                </a>
+                <a href="#" class="nav-item" data-page="funzone">
+                    <i class="fas fa-gamepad"></i> Fun Zone
+                </a>
+                <a href="#" class="nav-item" data-page="music">
+                    <i class="fas fa-music"></i> Music
+                </a>
+                <a href="#" class="nav-item" data-page="giftgenie">
+                    <i class="fas fa-robot"></i> Comedy Santa AI
+                </a>
+            </div>
+        </nav>
+
+        <!-- Landing Page -->
+        <section id="landing" class="page active">
+            <div class="container">
+                <div class="welcome-hero">
+                    <div class="text-center">
+                        <h1 class="hero-title">🎄 Welcome to Christmas Fun Hub! 🎅</h1>
+                        <p class="hero-subtitle">Your Free Holiday Wonderland - Music, Games, AI Magic & More!</p>
+                        
+                        <!-- Animated greeting -->
+                        <div class="greeting-animation">
+                            <div class="greeting-text">
+                                <span class="greeting-word">Merry</span>
+                                <span class="greeting-word">Christmas</span>
+                                <span class="greeting-word">Everyone!</span>
+                            </div>
+                            <div class="snowflakes-small">
+                                <i class="fas fa-snowflake"></i>
+                                <i class="fas fa-snowflake"></i>
+                                <i class="fas fa-snowflake"></i>
+                                <i class="fas fa-snowflake"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Daily Christmas Joke -->
+                <div class="row">
+                    <div class="col-lg-8">
+                        <div class="feature-card">
+                            <h4><i class="fas fa-laugh-beam me-2"></i>Today's Christmas Chuckle</h4>
+                            <div class="joke-card" id="dailyJoke">
+                                <p class="joke-question fs-5">What do you call a snowman with a six-pack?</p>
+                                <p class="joke-answer" style="display: none; margin-top: 15px;">An abdominal snowman! ⛄</p>
+                                <div class="d-flex gap-2 mt-3">
+                                    <button class="btn-primary" onclick="revealDailyJoke()">
+                                        <i class="fas fa-gift me-2"></i>Reveal Answer
+                                    </button>
+                                    <button class="btn-outline" onclick="nextDailyJoke()">
+                                        <i class="fas fa-random me-2"></i>Another Joke
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <!-- Christmas Music Preview -->
+                        <div class="feature-card h-100">
+                            <h4><i class="fas fa-music me-2"></i>Now Playing</h4>
+                            <div class="music-preview">
+                                <div class="d-flex align-items-center gap-3 mb-3">
+                                    <div class="music-icon">
+                                        <i class="fas fa-play-circle fa-2x text-warning" id="preview-play-icon"></i>
+                                    </div>
+                                    <div>
+                                        <h6 class="mb-0" id="preview-track">Black Santa</h6>
+                                        <small class="text-muted" id="preview-artist">Christmas Music</small>
+                                    </div>
+                                </div>
+                                <button class="btn-primary w-100" onclick="showPage('music')">
+                                    <i class="fas fa-headphones me-2"></i>Open Music Player
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Fun Grid -->
+                <div class="section-header mt-5">
+                    <h3 class="main-title"><i class="fas fa-bolt me-2"></i>Quick Fun Zones</h3>
+                    <p class="section-subtitle">Click to jump into holiday fun!</p>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-3 col-6 mb-4">
+                        <button class="fun-zone-card" onclick="showPage('giftgenie')">
+                            <div class="fun-icon">
+                                <i class="fas fa-robot"></i>
+                            </div>
+                            <h5>Comedy Santa AI</h5>
+                            <p>Get smart gift ideas</p>
+                            <div class="fun-hover">
+                                <i class="fas fa-arrow-right"></i>
+                            </div>
+                        </button>
+                    </div>
+                    <div class="col-md-3 col-6 mb-4">
+                        <button class="fun-zone-card" onclick="showPage('music')">
+                            <div class="fun-icon">
+                                <i class="fas fa-music"></i>
+                            </div>
+                            <h5>Music</h5>
+                            <p>Festive tunes</p>
+                            <div class="fun-hover">
+                                <i class="fas fa-arrow-right"></i>
+                            </div>
+                        </button>
+                    </div>
+                    <div class="col-md-3 col-6 mb-4">
+                        <button class="fun-zone-card" onclick="showPage('funzone')">
+                            <div class="fun-icon">
+                                <i class="fas fa-gamepad"></i>
+                            </div>
+                            <h5>Fun Zone</h5>
+                            <p>Games & jokes</p>
+                            <div class="fun-hover">
+                                <i class="fas fa-arrow-right"></i>
+                            </div>
+                        </button>
+                    </div>
+                    <div class="col-md-3 col-6 mb-4">
+                        <button class="fun-zone-card" onclick="showPage('checklist')">
+                            <div class="fun-icon">
+                                <i class="fas fa-list-check"></i>
+                            </div>
+                            <h5>Checklist</h5>
+                            <p>Stay organized</p>
+                            <div class="fun-hover">
+                                <i class="fas fa-arrow-right"></i>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Christmas Checklist Page -->
+        <section id="checklist" class="page">
+            <div class="container">
+                <div class="section-header">
+                    <h1 class="main-title"><i class="fas fa-list-check"></i> Christmas Checklist</h1>
+                    <p class="section-subtitle">Stay organized this holiday season</p>
+                </div>
+
+                <div class="checklist-container">
+                    <div class="progress-container">
+                        <div class="progress-bar">
+                            <div class="progress-bar-fill" id="progressFill"></div>
+                        </div>
+                        <div class="progress-stats">
+                            <span id="progressText">0 of 10 tasks completed</span>
+                        </div>
+                    </div>
+
+                    <div class="checklist-items">
+                        <!-- Checklist items will be populated by JavaScript -->
+                    </div>
+                    
+                    <button class="btn-primary mt-3" onclick="openAddTaskModal()">
+                        <i class="fas fa-plus me-2"></i>Add Custom Task
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Add Task Modal -->
+        <div id="addTaskModal" class="modal-overlay">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3><i class="fas fa-plus me-2"></i>Add New Task</h3>
+                    <button class="modal-close" onclick="closeAddTaskModal()">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <input type="text" id="newTaskInput" class="modal-input" placeholder="Enter a new Christmas task..." maxlength="100">
+                </div>
+                <div class="modal-footer">
+                    <button class="btn-outline" onclick="closeAddTaskModal()">Cancel</button>
+                    <button class="btn-primary" onclick="addTaskFromModal()">Add Task</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Fun Zone Page -->
+        <section id="funzone" class="page">
+            <div class="container">
+                <div class="section-header">
+                    <h1 class="main-title"><i class="fas fa-gamepad"></i> Christmas Fun Zone</h1>
+                    <p class="section-subtitle">Games, jokes, quotes and festive fun!</p>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-6">
+                        <!-- Joke Section -->
+                        <div class="feature-card">
+                            <h4><i class="fas fa-laugh-beam"></i> Christmas Jokes</h4>
+                            <div class="joke-display">
+                                <p class="joke-question" id="jokeQuestion">Why did Santa go to the doctor?</p>
+                                <p class="joke-answer" id="jokeAnswer" style="display: none;">Because he had low elf-esteem! 🧝‍♂️</p>
+                            </div>
+                            <button class="btn-primary w-100 mt-2" id="jokeRevealBtn">
+                                <span>Click to reveal joke</span>
+                                <span class="arrow">→</span>
+                            </button>
+                        </div>
+                        
+                        <!-- Quotes Section -->
+                        <div class="feature-card mt-4">
+                            <h4><i class="fas fa-quote-right"></i> Festive Quotes</h4>
+                            <div class="quote-display" id="quoteDisplay">
+                                <p class="quote-text">"Christmas isn't a season. It's a feeling."</p>
+                                <p class="quote-author">- Edna Ferber</p>
+                            </div>
+                            <button class="btn-outline w-100 mt-2" onclick="nextQuote()">
+                                <i class="fas fa-random"></i> Next Quote
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-6">
+                        <!-- Christmas Memory Game -->
+                        <div class="feature-card">
+                            <h4><i class="fas fa-brain"></i> Christmas Memory Game</h4>
+                            <div class="memory-game">
+                                <div class="memory-grid" id="memoryGame">
+                                    <!-- Cards will be generated by JavaScript -->
+                                </div>
+                                <div class="game-info">
+                                    <p class="game-score" id="memoryScore">Matches: 0/8</p>
+                                    <p class="game-moves" id="memoryMoves">Moves: 0</p>
+                                </div>
+                            </div>
+                            <button class="btn-primary w-100 mt-2" onclick="startMemoryGame()">
+                                <i class="fas fa-play"></i> Start New Game
+                            </button>
+                        </div>
+                        
+                        <!-- Christmas Trivia -->
+                        <div class="feature-card mt-4">
+                            <h4><i class="fas fa-question-circle"></i> Christmas Trivia</h4>
+                            <div class="trivia-game">
+                                <p class="trivia-question" id="triviaQuestion">In what city was Jesus born?</p>
+                                <div class="trivia-options">
+                                    <button class="trivia-option" data-correct="false">Jerusalem</button>
+                                    <button class="trivia-option" data-correct="true">Bethlehem</button>
+                                    <button class="trivia-option" data-correct="false">Nazareth</button>
+                                    <button class="trivia-option" data-correct="false">Jericho</button>
+                                </div>
+                                <p class="trivia-feedback" id="triviaFeedback" style="display: none;"></p>
+                            </div>
+                            <button class="btn-outline w-100 mt-2" onclick="nextTrivia()">
+                                <i class="fas fa-forward"></i> Next Question
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Music Player Page -->
+        <section id="music" class="page">
+            <div class="container">
+                <div class="section-header">
+                    <h1 class="main-title"><i class="fas fa-music"></i> Christmas Music Player</h1>
+                    <p class="section-subtitle">Enjoy free Christmas music</p>
+                </div>
+
+                <div class="music-player">
+                    <div class="player-controls">
+                        <div class="player-info">
+                            <h4 id="current-track">Christmas Is Coming</h4>
+                            <p id="current-artist">Mixkit Music</p>
+                        </div>
+                        
+                        <div class="control-buttons">
+                            <button class="control-btn" id="prev-btn">
+                                <i class="fas fa-step-backward"></i>
+                            </button>
+                            <button class="control-btn play-btn" id="play-btn">
+                                <i class="fas fa-play"></i>
+                            </button>
+                            <button class="control-btn" id="next-btn">
+                                <i class="fas fa-step-forward"></i>
+                            </button>
+                        </div>
+                        
+                        <div class="volume-control">
+                            <i class="fas fa-volume-up" id="volume-icon"></i>
+                            <input type="range" id="volume" min="0" max="100" value="50">
+                        </div>
+                    </div>
+                    
+                    <div class="music-progress">
+                        <div class="progress-container" id="music-progress">
+                            <div class="progress-fill"></div>
+                        </div>
+                        <div class="time-display">
+                            <span id="current-time">0:00</span>
+                            <span id="total-time">2:15</span>
+                        </div>
+                    </div>
+                    
+                    <div class="playlist">
+                        <h5>Christmas Playlist</h5>
+                        <div class="songs-list" id="songsList">
+                            <!-- Songs loaded by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Comedy Santa AI Page -->
+        <section id="giftgenie" class="page">
+            <div class="container">
+                <div class="giftgenie-content">
+                    <div class="section-header">
+                        <h1 class="main-title">
+                            <i class="fas fa-robot"></i> COMEDY SANTA
+                        </h1>
+                        <p class="section-subtitle">NAIJA EDITION! 😂</p>
+                    </div>
+
+                    <div class="ai-chat-container">
+                        <div class="chat-header">
+                            <div class="chat-status" id="chatStatus">
+                                <i class="fas fa-circle text-success"></i> Santa AI Online
+                            </div>
+                            <div class="chat-actions">
+                                <button class="btn-outline-sm" onclick="clearChat()" title="Clear Chat">
+                                    <i class="fas fa-trash"></i> Clear Chat
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="chat-window" id="chatWindow">
+                            <!-- Messages will appear here -->
+                        </div>
+                        
+                        <div class="chat-input-area">
+                            <div class="input-container">
+                                <textarea 
+                                    id="chatInput" 
+                                    placeholder="Free chat for hilarious Christmas gift suggestions in Nigeria!.... (Press Enter to send, Shift+Enter for new line)" 
+                                    maxlength="1000"
+                                    rows="1"></textarea>
+                            </div>
+                            <button class="btn-primary" id="sendBtn" onclick="sendMessage()">
+                                <i class="fas fa-paper-plane"></i> Send
+                            </button>
+                        </div>
+                        
+                        <div class="chat-footer">
+                            <small class="text-muted">
+                                <i class="fas fa-gift"></i> Free chat for hilarious Christmas gift suggestions in Nigeria!
+                                <br>
+                                <i class="fas fa-info-circle"></i> Ask about gifts, budgets, or just chat for fun!
+                            </small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h6>🎄 Christmas Fun Hub</h6>
+                        <p>Free holiday experience with Santa AI. Enjoy music, jokes, games and festive fun!</p>
+                        <div class="free-notice">
+                            <small><i class="fas fa-heart text-danger"></i> Completely Free Forever</small>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="footer-actions">
+                            <button class="btn-outline" id="bgm-toggle-btn">
+                                <i class="fas fa-volume-up"></i> Toggle Background Music
+                            </button>
+                            <button class="btn-primary-sm" onclick="showPage('giftgenie')">
+                                <i class="fas fa-robot"></i> Ask Santa AI
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <p>© 2025 Christmas Fun Hub. Made with ❤️ for holiday cheer.</p>
+                    <p class="mt-2">
+                        <small>
+                            Share with friends: 
+                            <a href="#" onclick="shareApp()" class="text-warning"><i class="fab fa-whatsapp"></i> WhatsApp</a> | 
+                            <a href="#" onclick="shareTwitter()" class="text-info"><i class="fab fa-twitter"></i> Twitter</a>
+                        </small>
+                    </p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Audio Elements -->
+    <audio id="background-music" loop>
+        <source src="music/o_come_all_ye_faithful.mp3" type="audio/mpeg">
+    </audio>
+    
+    <audio id="playlist-audio"></audio>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JS -->
+    <script src="script.js"></script>
+    
+    <!-- PWA Support Script -->
+    <script>
+        // Register Service Worker for PWA
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js').then(registration => {
+                    console.log('ServiceWorker registered: ', registration.scope);
+                }).catch(error => {
+                    console.log('ServiceWorker registration failed: ', error);
+                });
+            });
+        }
+        
+        // Share functions
+        function shareApp() {
+            const shareUrl = window.location.href;
+            const text = "🎄 Check out this awesome FREE Christmas Fun Hub! Includes Santa AI, music, games and more!";
+            const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(text + " " + shareUrl)}`;
+            window.open(whatsappUrl, '_blank');
+        }
+        
+        function shareTwitter() {
+            const shareUrl = window.location.href;
+            const text = "🎅 Check out this FREE Christmas Fun Hub with AI Santa! #Christmas #AI #HolidayFun";
+            const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(shareUrl)}`;
+            window.open(twitterUrl, '_blank');
+        }
+        
+        // Add to home screen
+        let deferredPrompt;
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            showNotification('📱 Add to home screen for quick access!', 'info');
+        });
+    </script>
+</body>
+</html>
